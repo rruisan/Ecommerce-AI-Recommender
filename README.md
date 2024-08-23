@@ -1,132 +1,128 @@
-# Recomendador para Ecommerce con IA
+# AI-Powered Ecommerce Recommender
 
-Este proyecto es un sistema de recomendación de libros basado en la similitud de calificaciones de los usuarios. El proyecto incluye una interfaz web para que los usuarios puedan buscar libros y recibir recomendaciones, así como una API construida con FastAPI.
+This project is a book recommendation system based on the similarity of user ratings. The project includes a web interface for users to search for books and receive recommendations, as well as an API built with FastAPI.
 
-## Índice
+## Table of Contents
 
-1. [Funcionalidades](#1-funcionalidades)
-   - 1.1 [Interfaz Web](#11-interfaz-web)
+1. [Features](#1-features)
+   - 1.1 [Web Interface](#11-web-interface)
    - 1.2 [API](#12-api)
-   - 1.3 [Algoritmo de Recomendación](#13-algoritmo-de-recomendación)
-2. [Requisitos Previos](#2-requisitos-previos)
-3. [Instalación](#3-instalación)
-4. [Uso](#4-uso)
+   - 1.3 [Recommendation Algorithm](#13-recommendation-algorithm)
+2. [Prerequisites](#2-prerequisites)
+3. [Installation](#3-installation)
+4. [Usage](#4-usage)
 5. [Tests](#5-tests)
-   - 5.1 [Ejecución de Tests](#51-ejecución-de-tests)
-6. [Contribuciones](#6-contribuciones)
-7. [Licencia](#7-licencia)
+   - 5.1 [Running Tests](#51-running-tests)
+6. [Contributions](#6-contributions)
+7. [License](#7-license)
 
 
-# 1. Funcionalidades
+# 1. Features
 
-## 1.1. Interfaz Web
+## 1.1. Web Interface
 
-La interfaz web (`app/static/index.html`) permite al usuario buscar un libro por su título. Una vez ingresado el título, se muestra la imagen del libro (si está disponible) y una lista de libros recomendados que son similares al libro buscado.
+The web interface (`app/static/index.html`) allows the user to search for a book by its title. Once the title is entered, the book's image (if available) is displayed along with a list of recommended books similar to the searched book.
 
 ## 1.2. API
 
-La API está construida con FastAPI y expone dos endpoints principales:
+The API is built with FastAPI and exposes two main endpoints:
 
-- **`/get_book_image/`**: Devuelve la imagen de un libro basado en el título ingresado.
-- **`/get_similar_books/`**: Devuelve una lista de libros similares al libro ingresado, junto con la imagen de cada libro recomendado.
+- **`/get_book_image/`**: Returns the image of a book based on the entered title.
+- **`/get_similar_books/`**: Returns a list of books similar to the entered book, along with the image of each recommended book.
 
-## 1.3. Algoritmo de Recomendación
+## 1.3. Recommendation Algorithm
 
-El sistema de recomendación funciona de la siguiente manera:
+The recommendation system works as follows:
 
-1. Carga de Datos: Se carga un archivo CSV (`app/data/bbdd_ratings.csv`) con las calificaciones de los usuarios para diferentes libros.
+1. Data Loading: A CSV file (`app/data/bbdd_ratings.csv`) containing user ratings for various books is loaded.
 
-2. Preprocesamiento: Se limpian los datos eliminando las filas que no tienen imágenes asociadas y se ajustan algunas columnas para que sean más fáciles de trabajar.
+2. Preprocessing: The data is cleaned by removing rows that do not have associated images, and some columns are adjusted for easier processing.
 
-3. Creación de la Matriz Item-Usuario: Se crea una matriz en la que cada fila es un libro y cada columna es un usuario, y los valores son las calificaciones que los usuarios han dado a esos libros.
+3. Item-User Matrix Creation: A matrix is created where each row represents a book, each column represents a user, and the values are the ratings users have given to those books.
 
-4. Cálculo de Similitudes: Se calcula qué tan similares son los libros entre sí usando la similitud de coseno, que mide qué tan cercanas son las calificaciones de dos libros.
+4. Similarity Calculation: The similarity between books is calculated using cosine similarity, which measures how close the ratings of two books are.
 
-5. Generación de Recomendaciones: Se genera una lista de recomendaciones para cada libro, incluyendo la imagen del libro recomendado.
+5. Recommendation Generation: A list of recommendations is generated for each book, including the image of the recommended book.
 
-6. Almacenamiento: Finalmente, se guarda la lista de recomendaciones en un archivo para que pueda ser usada por la aplicación.
+6. Storage: Finally, the list of recommendations is saved to a file for use by the application.
 
-# 2. Requisitos Previos
+# 2. Prerequisites
 
-- Python 3.7 o superior
+- Python 3.7 or higher
 
-# 3. Instalación
+# 3. Installation
 
-1. Clonar el repositorio:
+1. Clone the repository:
 
     ```bash
     git clone https://github.com/rruisan/ecommerce-ai-recommender.git
     cd ecommerce-ai-recommender
     ```
 
-2. Crear y activar un entorno virtual:
+2. Create and activate a virtual environment:
 
     ```bash
     python3 -m venv env
-    source env/bin/activate     # En Linux/MacOS
-    env\\Scripts\\activate      # En Windows
+    source env/bin/activate     # On Linux/MacOS
+    env\\Scripts\\activate      # On Windows
     ```
 
-3. Instalar las dependencias:
+3. Install dependencies:
 
     ```bash
     pip install -r requirements.txt
     ```
 
-4. Crear la matriz de recomendaciones:
+4. Create the recommendation matrix:
 
     ```bash
     python3 app/matrix_creation.py
     ```
 
-5. Iniciar el servidor FastAPI:
+5. Start the FastAPI server:
 
     ```bash
     uvicorn main:app --reload
     ```
 
-6. Abrir `app/static/index.html` en tu navegador para usar la aplicación.
+6. Open `app/static/index.html` in your browser to use the application.
 
-# 4. Uso
+# 4. Usage
 
-1. Abre `app/static/index.html` en tu navegador.
-2. Introduce el título de un libro en la barra de búsqueda.
-3. Haz clic en "Buscar".
-4. La imagen del libro aparecerá junto con tres recomendaciones de libros similares.
+1. Open `app/static/index.html` in your browser.
+2. Enter a book title in the search bar.
+3. Click "Search".
+4. The book's image will appear along with three recommendations of similar books.
 
-![Uso de la Aplicación](app/static/assets/screenshot.png)
-
-
-
+![App Usage](app/static/assets/screenshot.png)
 
 # 5. Tests
 
-Para asegurar que el proyecto funcione correctamente, se han creado tests automatizados que se pueden ejecutar utilizando pytest. Estos tests validan la funcionalidad de las principales funciones y servicios del proyecto.
+To ensure the project works correctly, automated tests have been created, which can be run using pytest. These tests validate the functionality of the main functions and services of the project.
 
-## 5.1. Ejecución de Tests
+## 5.1. Running Tests
 
-1. Asegúrate de estar en el entorno virtual:
+1. Ensure you are in the virtual environment:
 
     ```bash
-    source env/bin/activate     # En Linux/MacOS
-    env\\Scripts\\activate      # En Windows
+    source env/bin/activate     # On Linux/MacOS
+    env\\Scripts\\activate      # On Windows
     ```
 
-2. Instala los requisitos de desarrollo (si los hay) que se encuentran en **requirements.txt**.
+2. Install any development requirements found in **requirements.txt**.
 
-3. Ejecuta los tests:
+3. Run the tests:
 
     ```bash
     PYTHONPATH=$(pwd) pytest
     ```
 
-Los tests se encuentran en el directorio tests/ e incluyen validaciones para los módulos principales como test_main.py y test_services.py.
+The tests are located in the `tests/` directory and include validations for the main modules, such as `test_main.py` and `test_services.py`.
 
-# 6. Contribuciones
+# 6. Contributions
 
-Las contribuciones son bienvenidas. Siéntete libre de abrir un **issue** o enviar un **pull request** con mejoras.
+Contributions are welcome. Feel free to open an **issue** or submit a **pull request** with improvements.
 
-# 7. Licencia
+# 7. License
 
-Este proyecto está bajo la licencia MIT. Ver el archivo `LICENSE` para más detalles.
-
+This project is licensed under the MIT License. See the `LICENSE` file for more details.
