@@ -1,0 +1,2 @@
+app/data/bbdd_ratings.csv filter=lfs diff=lfs merge=lfs -text
+app/data/matriz_recomendaciones_long.pkl filter=lfs diff=lfs merge=lfs -text
