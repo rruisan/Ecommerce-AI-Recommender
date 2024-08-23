@@ -5,31 +5,32 @@ Este proyecto es un sistema de recomendación de libros basado en la similitud d
 ## Índice
 
 1. [Funcionalidades](#1-funcionalidades)
-    1.1. [Interfaz Web](#11-interfaz-web)
-    1.2. [API](#12-api)
-    1.3. [Algoritmo de Recomendación](#13-algoritmo-de-recomendación)
-2. [Requisitos Previos](#2-equisitos-previos)
+   1.1 [Interfaz Web](#11-interfaz-web)
+   1.2 [API](#12-api)
+   1.3 [Algoritmo de Recomendación](#13-algoritmo-de-recomendación)
+2. [Requisitos Previos](#2-requisitos-previos)
 3. [Instalación](#3-instalación)
-4. [Uso](#4.uso)
-5. [Tests](#5.tests)
-    5.1. [Ejecución de Tests](#51-ejecución-de-tests)
+4. [Uso](#4-uso)
+5. [Tests](#5-tests)
+   5.1 [Ejecución de Tests](#51-ejecución-de-tests)
 6. [Contribuciones](#6-contribuciones)
 7. [Licencia](#7-licencia)
 
-## 1. Funcionalidades
 
-### 1.1. Interfaz Web
+# 1. Funcionalidades
+
+## 1.1. Interfaz Web
 
 La interfaz web (`app/static/index.html`) permite al usuario buscar un libro por su título. Una vez ingresado el título, se muestra la imagen del libro (si está disponible) y una lista de libros recomendados que son similares al libro buscado.
 
-### 1.2. API
+## 1.2. API
 
 La API está construida con FastAPI y expone dos endpoints principales:
 
 - **`/get_book_image/`**: Devuelve la imagen de un libro basado en el título ingresado.
 - **`/get_similar_books/`**: Devuelve una lista de libros similares al libro ingresado, junto con la imagen de cada libro recomendado.
 
-### 1.3. Algoritmo de Recomendación
+## 1.3. Algoritmo de Recomendación
 
 El sistema de recomendación funciona de la siguiente manera:
 
@@ -45,11 +46,11 @@ El sistema de recomendación funciona de la siguiente manera:
 
 6. Almacenamiento: Finalmente, se guarda la lista de recomendaciones en un archivo para que pueda ser usada por la aplicación.
 
-## 2. Requisitos Previos
+# 2. Requisitos Previos
 
 - Python 3.7 o superior
 
-## 3. Instalación
+# 3. Instalación
 
 1. Clonar el repositorio:
 
@@ -86,7 +87,7 @@ El sistema de recomendación funciona de la siguiente manera:
 
 6. Abrir `app/static/index.html` en tu navegador para usar la aplicación.
 
-## 4. Uso
+# 4. Uso
 
 1. Abre `app/static/index.html` en tu navegador.
 2. Introduce el título de un libro en la barra de búsqueda.
@@ -98,11 +99,11 @@ El sistema de recomendación funciona de la siguiente manera:
 
 
 
-## 5. Tests
+# 5. Tests
 
 Para asegurar que el proyecto funcione correctamente, se han creado tests automatizados que se pueden ejecutar utilizando pytest. Estos tests validan la funcionalidad de las principales funciones y servicios del proyecto.
 
-### 5.1. Ejecución de Tests
+## 5.1. Ejecución de Tests
 
 1. Asegúrate de estar en el entorno virtual:
 
@@ -121,11 +122,11 @@ Para asegurar que el proyecto funcione correctamente, se han creado tests automa
 
 Los tests se encuentran en el directorio tests/ e incluyen validaciones para los módulos principales como test_main.py y test_services.py.
 
-## 6. Contribuciones
+# 6. Contribuciones
 
 Las contribuciones son bienvenidas. Siéntete libre de abrir un **issue** o enviar un **pull request** con mejoras.
 
-## 7. Licencia
+# 7. Licencia
 
 Este proyecto está bajo la licencia MIT. Ver el archivo `LICENSE` para más detalles.
 
