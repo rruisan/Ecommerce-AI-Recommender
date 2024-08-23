@@ -5,14 +5,14 @@ Este proyecto es un sistema de recomendación de libros basado en la similitud d
 ## Índice
 
 1. [Funcionalidades](#1-funcionalidades)
-   1.1 [Interfaz Web](#11-interfaz-web)
-   1.2 [API](#12-api)
-   1.3 [Algoritmo de Recomendación](#13-algoritmo-de-recomendación)
+   - 1.1 [Interfaz Web](#11-interfaz-web)
+   - 1.2 [API](#12-api)
+   - 1.3 [Algoritmo de Recomendación](#13-algoritmo-de-recomendación)
 2. [Requisitos Previos](#2-requisitos-previos)
 3. [Instalación](#3-instalación)
 4. [Uso](#4-uso)
 5. [Tests](#5-tests)
-   5.1 [Ejecución de Tests](#51-ejecución-de-tests)
+   - 5.1 [Ejecución de Tests](#51-ejecución-de-tests)
 6. [Contribuciones](#6-contribuciones)
 7. [Licencia](#7-licencia)
 
