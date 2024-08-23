@@ -13,8 +13,9 @@ This project is a book recommendation system based on the similarity of user rat
 4. [Usage](#4-usage)
 5. [Tests](#5-tests)
    - 5.1 [Running Tests](#51-running-tests)
-6. [Contributions](#6-contributions)
-7. [License](#7-license)
+6. [Technologies Used](#6-technologies-used)
+7. [Contributions](#7-contributions)
+8. [License](#8-license)
 
 
 # 1. Features
@@ -119,10 +120,19 @@ To ensure the project works correctly, automated tests have been created, which 
 
 The tests are located in the `tests/` directory and include validations for the main modules, such as `test_main.py` and `test_services.py`.
 
-# 6. Contributions
+# 6. Technologies Used
+
+- **Python 🐍**: The core language used for development.
+- **Scikit-learn 📊**: Utilized for implementing machine learning algorithms and similarity calculations.
+- **FastAPI 🚀**: The web framework used for building the API.
+- **HTML/CSS/JavaScript 🌐**: Used for the front-end interface.
+- **Uvicorn ⚡**: ASGI server for running FastAPI.
+- **Pytest 🧪**: For automated testing.
+
+# 7. Contributions
 
 Contributions are welcome. Feel free to open an **issue** or submit a **pull request** with improvements.
 
-# 7. License
+# 8. License
 
 This project is licensed under the MIT License. See the `LICENSE` file for more details.
