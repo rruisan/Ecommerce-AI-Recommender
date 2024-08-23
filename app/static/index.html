@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recomendador de Libros</title>
+    <style>
+        /* Basic styles for the page */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* Container for the entire content */
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        /* Styles for the input section */
+        .input-container {
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Styles for the label in the input section */
+        .input-container label {
+            font-size: 1.2em;
+            margin-right: 10px;
+        }
+
+        /* Styles for the text input field */
+        .input-container input {
+            flex: 1;
+            padding: 10px;
+            font-size: 1em;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-right: 10px;
+        }
+
+        /* Styles for the button in the input section */
+        .input-container button {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        /* Change button color on hover */
+        .input-container button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Container for displaying the selected book's details */
+        .product-container {
+            display: none;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        /* Styles for the book title in the product container */
+        .product-container h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        /* Styles for the book image in the product container */
+        .product-container img {
+            width: 200px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        /* Styles for the recommended products section */
+        .recommended-products h3 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .recommended-products {
+            text-align: center;
+        }
+
+        /* Container for the list of recommended books */
+        #recommendations-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        /* Styles for each recommended product */
+        .recommended-product {
+            border: 1px solid #ddd;
+            padding: 15px;
+            width: 200px;
+            box-sizing: border-box;
+            border-radius: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Add a hover effect for each recommended product */
+        .recommended-product:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Styles for the image in each recommended product */
+        .recommended-product img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        /* Styles for the title in each recommended product */
+        .recommended-product h4 {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+
+        /* Styles for the similarity score in each recommended product */
+        .recommended-product p {
+            font-size: 0.9em;
+            color: #555;
+            margin-top: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Main container for the content -->
+    <div class="container">
+        <!-- Input section for searching a book by title -->
+        <div class="input-container">
+            <label for="book_title">Título del libro:</label>
+            <input type="text" id="book_title" placeholder="Ingrese el título del libro">
+            <button id="fetch_book">Buscar</button>
+        </div>
+
+        <!-- Container to display the details of the selected book -->
+        <div class="product-container" id="product-details">
+            <h1 id="book-title">Título del libro</h1>
+            <img src="" alt="Imagen del libro" id="book-image">
+        </div>
+
+        <!-- Section to display recommended books -->
+        <div class="recommended-products">
+            <h3>Libros recomendados</h3>
+            <div id="recommendations-container">
+                <!-- Recommended books will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('fetch_book').addEventListener('click', function () {
+            const bookTitle = document.getElementById('book_title').value;
+            const productDetails = document.getElementById('product-details');
+            const recommendationsContainer = document.getElementById('recommendations-container');
+
+            // Clear previous content
+            productDetails.style.display = 'none';
+            recommendationsContainer.innerHTML = '';
+
+            // Fetch the book image and details from the API
+            fetch('http://127.0.0.1:8000/get_book_image/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ title: bookTitle })
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Libro no encontrado.');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Display the main book details
+                    document.getElementById('book-title').textContent = bookTitle;
+                    document.getElementById('book-image').src = data.image;
+                    productDetails.style.display = 'block';
+
+                    // Fetch similar book recommendations from the API
+                    return fetch('http://127.0.0.1:8000/get_similar_books/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ title: bookTitle })
+                    });
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Ensure 'similar_books' is an array before iterating
+                    if (Array.isArray(data.similar_books)) {
+                        data.similar_books.forEach(recommendation => {
+                            // Create a new div element for each recommended book
+                            const recommendationDiv = document.createElement('div');
+                            recommendationDiv.className = 'recommended-product';
+                            recommendationDiv.innerHTML = `
+                                <h4>${recommendation.title}</h4>
+                                <img src="${recommendation.image}" alt="${recommendation.title}" />
+                                <p>Similitud: ${recommendation.similarity.toFixed(2)}</p>
+                            `;
+                            recommendationsContainer.appendChild(recommendationDiv);
+                        });
+                    } else {
+                        console.error('La respuesta no contiene una lista de libros recomendados.');
+                    }
+                })
+                .catch(error => {
+                    alert(error.message);
+                });
+        });
+    </script>
+
+</body>
+
+</html>
