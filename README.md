@@ -55,8 +55,8 @@ El sistema de recomendación funciona de la siguiente manera:
 1. Clonar el repositorio:
 
     ```bash
-    git clone https://github.com/rruisan/recomendador-ecommerce.git
-    cd recomendador-ecommerce
+    git clone https://github.com/rruisan/ecommerce-ai-recommender.git
+    cd ecommerce-ai-recommender
     ```
 
 2. Crear y activar un entorno virtual:
