@@ -123,8 +123,10 @@ The tests are located in the `tests/` directory and include validations for the 
 # 6. Technologies Used
 
 - **Python 🐍**: The core language used for development.
-- **Scikit-learn 📊**: Utilized for implementing machine learning algorithms and similarity calculations.
+- **Scikit-learn 🧠**: Utilized for implementing machine learning algorithms and similarity calculations.
 - **FastAPI 🚀**: The web framework used for building the API.
+- **Pandas 🐼**: Used for data manipulation and preprocessing.
+- **NumPy 📊**: Used for numerical computations, particularly in handling arrays and matrices.
 - **HTML/CSS/JavaScript 🌐**: Used for the front-end interface.
 - **Uvicorn ⚡**: ASGI server for running FastAPI.
 - **Pytest 🧪**: For automated testing.
